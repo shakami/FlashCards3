@@ -1,0 +1,12 @@
+﻿body {
+}
+
+.card-deck .card {
+    min-width: 15rem;
+    max-width: 15rem;
+    min-height: 18rem;
+}
+
+.card-deck a {
+    text-decoration: none;
+}

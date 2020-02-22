@@ -1,0 +1,23 @@
+﻿<div>
+    <div class="card text-white bg-dark mb-3" ng-hide="editing">
+        <div class="card-header">
+            <button class="btn btn-sm btn-dark" ng-click="toggleEdit()">Edit</button>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ card.title }}</h5>
+            <p class="card-text">{{ card.description }}</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-dark mb-3" ng-show="editing">
+        <div class="card-header">
+            <button class="btn btn-sm btn-success">Save</button>
+            <button class="btn btn-sm btn-danger" ng-click="delete()">Delete</button>
+            <button class="btn btn-sm btn-dark" ng-click="toggleEdit()">Cancel</button>
+        </div>
+        <div class="card-body">
+            <input class="card-title form-control" ng-model="card.title" />
+            <textarea class="card-text form-control" ng-model="card.description" />
+        </div>
+    </div>
+</div>

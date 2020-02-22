@@ -1,0 +1,48 @@
+﻿<div>
+    <div ng-hide="new">
+        <div class="card text-white bg-info mb-3" ng-hide="editing">
+            <div class="card-header">
+                <button class="btn btn-sm btn-info" ng-click="toggleEdit()">Edit</button>
+            </div>
+            <div class="card-body">
+                <a class="text-white" href="decks/{{ deck.id }}">
+                    <h5 class="card-title">{{ deck.name }}</h5>
+                </a>
+            </div>
+        </div>
+
+        <div class="card text-white bg-info mb-3" ng-show="editing">
+            <div class="card-header">
+                <button class="btn btn-sm btn-success">Save</button>
+                <button class="btn btn-sm btn-danger" ng-click="delete()">Delete</button>
+                <button class="btn btn-sm btn-dark" ng-click="toggleEdit()">Cancel</button>
+            </div>
+            <div class="card-body">
+                <input class="card-title form-control" ng-model="deck.name" />
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="new">
+        <div class="card text-white bg-success mb-3" ng-hide="editing">
+            <div class="card-header">
+                <button class="btn btn-sm btn-success" ng-click="toggleEdit()">Add</button>
+            </div>
+            <div class="card-body">
+                <a class="text-white" href="" type="button" ng-click="toggleEdit()">
+                    <h5 class="card-title">Add New Deck</h5>
+                </a>
+            </div>
+        </div>
+
+        <div class="card text-white bg-info mb-3" ng-show="editing">
+            <div class="card-header">
+                <button class="btn btn-sm btn-success">Save</button>
+                <button class="btn btn-sm btn-dark" ng-click="toggleEdit()">Cancel</button>
+            </div>
+            <div class="card-body">
+                <input class="card-title form-control" ng-model="newDeck.name" />
+            </div>
+        </div>
+    </div>
+</div>

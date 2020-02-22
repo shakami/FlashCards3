@@ -1,0 +1,11 @@
+﻿<div>
+    <h1>{{ vm.deck.name }}</h1>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="card-deck">
+                <fc-card ng-repeat="card in vm.cards" card="card"></fc-card>
+            </div>
+        </div>
+    </div>
+</div>

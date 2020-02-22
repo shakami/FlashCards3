@@ -1,0 +1,13 @@
+﻿<div>
+    <h1>All Decks</h1>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="card-deck">
+                <fc-deck ng-repeat="deck in vm.decks" deck="deck"></fc-deck>
+
+                <fc-deck new="true"></fc-deck>
+            </div>
+        </div>
+    </div>
+</div>
