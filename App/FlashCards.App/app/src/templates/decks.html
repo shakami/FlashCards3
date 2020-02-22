@@ -6,7 +6,7 @@
             <div class="card-deck">
                 <fc-deck ng-repeat="deck in vm.decks" deck="deck"></fc-deck>
 
-                <fc-deck new="true"></fc-deck>
+                <fc-deck new="true" callback="vm.createDeck(name)"></fc-deck>
             </div>
         </div>
     </div>

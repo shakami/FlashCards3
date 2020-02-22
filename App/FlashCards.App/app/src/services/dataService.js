@@ -8,7 +8,10 @@
         return {
             getAllDecks: getAllDecks,
             getDeck: getDeck,
-            getCardsInDeck: getCardsInDeck
+            getCardsInDeck: getCardsInDeck,
+
+            createDeck: createDeck,
+            renameDeck: renameDeck
         };
 
         function getAllDecks() {
@@ -48,6 +51,34 @@
             return $http(req)
                 .then(sendResponseData)
                 .catch(sendError);
+        }
+
+        function createDeck(deckName) {
+            var req =
+            {
+                method: 'POST',
+                url: 'https://localhost:44789/api/decks/',
+                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                data: { name: deckName }
+            };
+
+            return $http(req)
+                .then(sendResponseData)
+                .catch(sendError);
+        }
+
+        function renameDeck(deck) {
+            var req =
+            {
+                method: 'PUT',
+                url: 'https://localhost:44789/api/decks/' + deck.id,
+                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                data: deck
+            };
+
+            return $http(req)
+                .then(sendResponseData)
+                .catch(sendError);   
         }
 
 

@@ -11,7 +11,8 @@
         var directive = {
             replace: true,
             scope: {
-                card: '='
+                card: '=',
+                new: '@'
             },
             templateUrl: '/app/src/directives/fc-card.html',
             restrict: 'E',

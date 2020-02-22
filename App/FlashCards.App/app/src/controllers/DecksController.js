@@ -9,8 +9,7 @@
     function DecksController(dataService) {
         var vm = this;
         vm.decks = [];
-        vm.editing = false;
-        vm.edit = edit;
+        vm.createDeck = createDeck;
 
         activate();
 
@@ -25,8 +24,12 @@
             });
         }
 
-        function edit() {
-            vm.editing = !vm.editing;
+        function createDeck(deckName) {
+            console.log('hi');
+            return dataService.createDeck(deckName).then(function () {
+                console.log('hi'); 
+                return getDecks();
+            })
         }
 
     }
