@@ -11,7 +11,8 @@
             getCardsInDeck: getCardsInDeck,
 
             createDeck: createDeck,
-            renameDeck: renameDeck
+            editDeck: editDeck,
+            deleteDeck: deleteDeck
         };
 
         function getAllDecks() {
@@ -67,7 +68,7 @@
                 .catch(sendError);
         }
 
-        function renameDeck(deck) {
+        function editDeck(deck) {
             var req =
             {
                 method: 'PUT',
@@ -78,7 +79,20 @@
 
             return $http(req)
                 .then(sendResponseData)
-                .catch(sendError);   
+                .catch(sendError);
+        }
+
+        function deleteDeck(deck) {
+            var req =
+            {
+                method: 'DELETE',
+                url: 'https://localhost:44789/api/decks/' + deck.id,
+                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+            };
+
+            return $http(req)
+                .then(sendResponseData)
+                .catch(sendError);
         }
 
 

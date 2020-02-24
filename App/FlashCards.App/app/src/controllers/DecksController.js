@@ -10,6 +10,8 @@
         var vm = this;
         vm.decks = [];
         vm.createDeck = createDeck;
+        vm.editDeck = editDeck;
+        vm.deleteDeck = deleteDeck;
 
         activate();
 
@@ -24,12 +26,22 @@
             });
         }
 
-        function createDeck(deckName) {
-            console.log('hi');
-            return dataService.createDeck(deckName).then(function () {
-                console.log('hi'); 
+        function createDeck(name) {
+            return dataService.createDeck(name).then(function () {
                 return getDecks();
-            })
+            });
+        }
+
+        function editDeck(deck) {
+            return dataService.renameDeck(deck).then(function () {
+                return getDecks();
+            });
+        }
+
+        function deleteDeck(deck) {
+            return dataService.deleteDeck(deck).then(function () {
+                return getDecks();
+            });
         }
 
     }

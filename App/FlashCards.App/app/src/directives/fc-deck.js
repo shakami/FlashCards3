@@ -13,15 +13,25 @@
             scope: {
                 deck: '=',
                 new: '@',
-                callback: '&'
+                deckCreateFunction: '&method',
+                deckDeleteFunction: '&'
             },
             templateUrl: '/app/src/directives/fc-deck.html',
             restrict: 'E',
             controller: function ($scope) {
+                var vm = $scope;
                 $scope.editing = false;
                 $scope.toggleEdit = function () { $scope.editing = !$scope.editing };
 
-                $scope.createDeck = function () { console.log('save'); $scope.callback({ name: 'john' }); };
+                $scope.createDeck = function () {
+                    $scope.deckCreateFunction($scope.newDeck);
+                    $scope.newDeck = {};
+                    $scope.toggleEdit();
+                };
+
+                $scope.deleteDeck = function () {
+                    $scope.deckDeleteFunction();
+                }
             }
         };
         return directive;
