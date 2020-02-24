@@ -1,13 +1,18 @@
-﻿<div>
+﻿<div class="container">
     <h1>{{ vm.deck.name }}</h1>
+    <br />
 
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="card-deck">
-                <fc-card ng-repeat="card in vm.cards" card="card"></fc-card>
-
-                <fc-card new="true"></fc-card>
+                <fc-flash-card ng-repeat="card in vm.cards"
+                               card="card"
+                               edit-function="vm.editCard(card)"
+                               delete-function="vm.deleteCard(card)">
+                </fc-flash-card>
+                <fc-flash-card-create></fc-flash-card-create>
             </div>
         </div>
     </div>
+
 </div>

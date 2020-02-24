@@ -1,18 +1,18 @@
 (function () {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'ngResource']);
+    var app = angular.module('app', ['ngRoute']);
 
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);
 
         $routeProvider
-            .when('/', {
-                controller: 'HomeController',
-                controllerAs: 'home',
-                templateUrl: '/app/src/templates/home.html'
-            })
+            //.when('/', {
+            //    controller: 'HomeController',
+            //    controllerAs: 'home',
+            //    templateUrl: '/app/src/templates/home.html'
+            //})
             .when('/decks', {
                 controller: 'DecksController',
                 controllerAs: 'vm',
@@ -22,7 +22,8 @@
                 controller: 'CardsController',
                 controllerAs: 'vm',
                 templateUrl: '/app/src/templates/cards.html'
-            });
+            })
+            .otherwise('/decks');
 
     }]);
 })();

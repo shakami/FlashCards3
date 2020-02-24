@@ -5,9 +5,19 @@
     <meta charset="utf-8" />
     <base href="/" />
     <title>Flash Cards</title>
-    <link rel="icon" href="/app/content/favicon.ico">
-    <link href="app/lib/bootstrap.css" rel="stylesheet" />
-    <link href="app/css/app.css" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/solid.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="app/css/app.css" />
 </head>
 <body ng-app="app">
     <header>
@@ -39,9 +49,19 @@
 
 
     <!-- Library Files -->
-    <script src="app/lib/angular.js"></script>
-    <script src="app/lib/angular-route.js"></script>
-    <script src="app/lib/angular-resource.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.min.js"
+            crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+
 
     <!-- app module -->
     <script src="app/src/app.js"></script>
@@ -55,9 +75,12 @@
     <script src="app/src/services/dataService.js"></script>
 
     <!-- directives -->
-    <script src="app/src/directives/fc-card.js"></script>
+    <script src="app/src/directives/fc-generic-card.js"></script>
+    <script src="app/src/directives/fc-generic-card-create.js"></script>
     <script src="app/src/directives/fc-deck.js"></script>
-
+    <script src="app/src/directives/fc-deck-create.js"></script>
+    <script src="app/src/directives/fc-flash-card.js"></script>
+    <script src="app/src/directives/fc-flash-card-create.js"></script>
 
 </body>
 </html>

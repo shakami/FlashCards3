@@ -11,6 +11,8 @@
         
         vm.deck = {};
         vm.cards = [];
+        vm.editCard = editCard;
+        vm.deleteCard = deleteCard;
 
         activate();
 
@@ -26,6 +28,14 @@
                 vm.cards = data;
                 return vm.cards;
             });  
+        }
+
+        function editCard(card) {
+            console.log(card);
+        }
+
+        function deleteCard(card) {
+            console.log(card);
         }
     }
 

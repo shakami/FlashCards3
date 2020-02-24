@@ -1,0 +1,50 @@
+﻿<div>
+    <div ng-hide="editing"
+         class="card bg-secondary text-white mb-3">
+        <div class="card-header">
+            <span>&nbsp;</span>
+        </div>
+        <div class="card-body">
+            <a ng-click="toggleEdit()" role="button" href="">
+                <h3 class="card-title text-white">Add New {{ isFlashCard ? 'Card' : 'Deck' }}</h3>
+            </a>
+        </div>
+        <div class="card-footer">
+            <button ng-click="toggleEdit()"
+                    class="btn btn-sm btn-success"
+                    data-toggle="tooltip"
+                    title="Add">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div ng-show="editing"
+         class="card bg-info text-white mb-3">
+        <div class="card-header">
+            &nbsp;
+        </div>
+        <div class="card-body">
+            <input class="card-title form-control" ng-model="title" placeholder="Title" />
+            <textarea rows="3" ng-show="isFlashCard"
+                      class="card-text form-control" ng-model="text"
+                      placeholder="Description">
+            </textarea>
+        </div>
+        <div class="card-footer">
+            <button type="button" ng-click="save()"
+                    class="btn btn-sm btn-success"
+                    data-toggle="tooltip"
+                    title="Save">
+                <i class="fas fa-check"></i>
+            </button>
+            <button ng-click="toggleEdit()"
+                    class="btn btn-sm btn-dark"
+                    data-toggle="tooltip"
+                    title="Cancel">
+                <i class="fas fa-undo"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
