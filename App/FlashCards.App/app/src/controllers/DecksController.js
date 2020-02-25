@@ -4,14 +4,23 @@
         .module('app')
         .controller('DecksController', DecksController);
 
-    DecksController.$inject = ['dataService'];
+    DecksController.$inject = ['dataService', '$anchorScroll'];
 
-    function DecksController(dataService) {
+    function DecksController(dataService, $anchorScroll) {
         var vm = this;
         vm.decks = [];
         vm.createDeck = createDeck;
         vm.editDeck = editDeck;
         vm.deleteDeck = deleteDeck;
+        vm.newDeck = {};
+
+        vm.scrollToAddNewDeck = scrollToAddNewDeck;
+        
+        function scrollToAddNewDeck() {
+            $('#createButton').click();
+            $anchorScroll('addNewDeck');
+        }
+
 
         activate();
 
@@ -26,14 +35,24 @@
             });
         }
 
-        function createDeck(name) {
-            return dataService.createDeck(name).then(function () {
-                return getDecks();
-            });
+        
+        function createDeck(deck) {
+            return dataService.createDeck(deck)
+                .then(function () {
+                    vm.newDeck = {};
+                    return getDecks();
+                })
+                .catch(function (response) {
+                    if (response.status == '422') { // validation error
+
+                    }
+
+                    console.log('error: ' + response);
+                });
         }
 
         function editDeck(deck) {
-            return dataService.renameDeck(deck).then(function () {
+            return dataService.editDeck(deck).then(function () {
                 return getDecks();
             });
         }

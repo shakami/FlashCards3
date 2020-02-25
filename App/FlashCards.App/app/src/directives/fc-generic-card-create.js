@@ -30,21 +30,17 @@
 
         $scope.save = save;
 
-        activateTooltips();
-
-        function activateTooltips() {
-            return $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            });
-        }
-
         function toggleEdit() {
+            setTimeout(function () { $('#createInput').focus() }, 300);
+
             $scope.editing = !$scope.editing;
         }
 
-        function save() {
-            $scope.saveFunction();
-            $scope.editing = false;
+        function save(form) {
+            if (form.$valid) {
+                $scope.saveFunction();
+                $scope.editing = false;
+            }
         }
     }
 

@@ -8,11 +8,14 @@
         return {
             getAllDecks: getAllDecks,
             getDeck: getDeck,
-            getCardsInDeck: getCardsInDeck,
-
             createDeck: createDeck,
             editDeck: editDeck,
-            deleteDeck: deleteDeck
+            deleteDeck: deleteDeck,
+
+            getCardsInDeck: getCardsInDeck,
+            createCard: createCard,
+            editCard: editCard,
+            deleteCard: deleteCard
         };
 
         function getAllDecks() {
@@ -54,13 +57,13 @@
                 .catch(sendError);
         }
 
-        function createDeck(deckName) {
+        function createDeck(deck) {
             var req =
             {
                 method: 'POST',
                 url: 'https://localhost:44789/api/decks/',
                 headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
-                data: { name: deckName }
+                data: deck
             };
 
             return $http(req)
@@ -95,13 +98,54 @@
                 .catch(sendError);
         }
 
+        function createCard(deckId, card) {
+            var req =
+            {
+                method: 'POST',
+                url: 'https://localhost:44789/api/decks/' + deckId + '/cards',
+                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                data: card
+            };
+
+            return $http(req)
+                .then(sendResponseData)
+                .catch(sendError);
+        }
+
+        function editCard(card) {
+            var req =
+            {
+                method: 'PUT',
+                url: 'https://localhost:44789/api/decks/' + card.deckId + '/cards/' + card.id,
+                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                data: card
+            };
+
+            return $http(req)
+                .then(sendResponseData)
+                .catch(sendError);
+        }
+
+        function deleteCard(card) {
+            var req =
+            {
+                method: 'DELETE',
+                url: 'https://localhost:44789/api/decks/' + card.deckId + '/cards/' + card.id,
+                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache'},
+            };
+
+            return $http(req)
+                .then(sendResponseData)
+                .catch(sendError);
+        }
+
 
         function sendResponseData(response) {
             return response.data;
         }
 
         function sendError(response) {
-            return $q.reject('Error communicating with the server: ' + response.statusText);
+            return $q.reject(response);
         }
 
     }

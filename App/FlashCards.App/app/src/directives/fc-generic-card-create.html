@@ -10,8 +10,9 @@
             </a>
         </div>
         <div class="card-footer">
-            <button ng-click="toggleEdit()"
-                    class="btn btn-sm btn-success"
+            <button id="createButton"
+                    ng-click="toggleEdit()"
+                    class="btn btn-sm btn-success btn-oval"
                     data-toggle="tooltip"
                     title="Add">
                 <i class="fas fa-plus"></i>
@@ -19,32 +20,44 @@
         </div>
     </div>
 
-    <div ng-show="editing"
-         class="card bg-info text-white mb-3">
-        <div class="card-header">
-            &nbsp;
+    <form ng-show="editing" name="newCardForm">
+        <div class="card bg-success text-white mb-3">
+            <div class="card-header">
+                &nbsp;
+            </div>
+            <div class="card-body">
+                <input id="createInput"
+                       type="text"
+                       class="card-title form-control"
+                       ng-model="title"
+                       placeholder="Title"
+                       required />
+                <textarea ng-show="isFlashCard" rows="3"
+                          class="card-text form-control"
+                          ng-model="text"
+                          placeholder="Description"
+                          ng-required="isFlashCard">
+                </textarea>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button type="submit" ng-click="save(newCardForm)"
+                            class="btn btn-sm btn-success btn-circle"
+                            data-toggle="tooltip"
+                            title="Save">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button type="reset"
+                            ng-click="toggleEdit()"
+                            class="btn btn-sm btn-dark btn-circle"
+                            data-toggle="tooltip"
+                            title="Cancel">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <input class="card-title form-control" ng-model="title" placeholder="Title" />
-            <textarea rows="3" ng-show="isFlashCard"
-                      class="card-text form-control" ng-model="text"
-                      placeholder="Description">
-            </textarea>
-        </div>
-        <div class="card-footer">
-            <button type="button" ng-click="save()"
-                    class="btn btn-sm btn-success"
-                    data-toggle="tooltip"
-                    title="Save">
-                <i class="fas fa-check"></i>
-            </button>
-            <button ng-click="toggleEdit()"
-                    class="btn btn-sm btn-dark"
-                    data-toggle="tooltip"
-                    title="Cancel">
-                <i class="fas fa-undo"></i>
-            </button>
-        </div>
-    </div>
+    </form>
+
 
 </div>

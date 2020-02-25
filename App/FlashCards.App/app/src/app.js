@@ -8,11 +8,6 @@
         $locationProvider.html5Mode(true);
 
         $routeProvider
-            //.when('/', {
-            //    controller: 'HomeController',
-            //    controllerAs: 'home',
-            //    templateUrl: '/app/src/templates/home.html'
-            //})
             .when('/decks', {
                 controller: 'DecksController',
                 controllerAs: 'vm',

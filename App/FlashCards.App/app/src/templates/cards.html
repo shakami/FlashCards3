@@ -1,4 +1,13 @@
 ﻿<div class="container">
+    <div class="btn-group">
+        <a href="/decks" class="btn btn-primary btn-circle mb-3 text-white" data-toggle="tooltip" title="Back">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <button ng-click="vm.scrollToAddNewCard()" class="btn btn-success btn-circle mb-3" data-toggle="tooltip" title="Add New Card">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    
     <h1>{{ vm.deck.name }}</h1>
     <br />
 
@@ -10,9 +19,9 @@
                                edit-function="vm.editCard(card)"
                                delete-function="vm.deleteCard(card)">
                 </fc-flash-card>
-                <fc-flash-card-create></fc-flash-card-create>
+                <fc-flash-card-create id="addNewCard" card="vm.newCard" save-function="vm.createCard(vm.newCard)"></fc-flash-card-create>
             </div>
         </div>
     </div>
-
 </div>
+

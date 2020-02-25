@@ -10,6 +10,8 @@
         var vm = this;
 
         vm.header = 'Flash Cards Application';
+
+
     }
 
 }());
