@@ -4,9 +4,9 @@
         .module('app')
         .controller('DecksController', DecksController);
 
-    DecksController.$inject = ['dataService', '$anchorScroll'];
+    DecksController.$inject = ['dataService', '$anchorScroll', '$scope'];
 
-    function DecksController(dataService, $anchorScroll) {
+    function DecksController(dataService, $anchorScroll, $scope) {
         var vm = this;
         vm.decks = [];
         vm.createDeck = createDeck;
@@ -15,7 +15,11 @@
         vm.newDeck = {};
 
         vm.scrollToAddNewDeck = scrollToAddNewDeck;
-        
+
+        $scope.$on('searchEvent', function (e, args) {
+            vm.searchPhrase = args.searchPhrase;
+        });
+
         function scrollToAddNewDeck() {
             $('#createButton').click();
             $anchorScroll('addNewDeck');

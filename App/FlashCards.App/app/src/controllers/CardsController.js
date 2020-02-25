@@ -4,9 +4,9 @@
         .module('app')
         .controller('CardsController', CardsController);
 
-    CardsController.$inject = ['$routeParams', 'dataService', '$anchorScroll'];
+    CardsController.$inject = ['$routeParams', 'dataService', '$anchorScroll', '$scope'];
 
-    function CardsController($routeParams, dataService, $anchorScroll) {
+    function CardsController($routeParams, dataService, $anchorScroll, $scope) {
         var vm = this;
 
         vm.deck = {};
@@ -20,6 +20,10 @@
         vm.toggleDeleteDeck = toggleDeleteDeck;
 
         vm.scrollToAddNewCard = scrollToAddNewCard;
+
+        $scope.$on('searchEvent', function (e, args) {
+            vm.searchPhrase = args.searchPhrase;
+        });
 
         function scrollToAddNewCard() {
             $('#createButton').click();
