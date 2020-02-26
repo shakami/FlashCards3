@@ -1,0 +1,17 @@
+﻿<div class="card-header">
+    <span ng-if="!isFlashCard || creating || editing">&nbsp;</span>
+    <div ng-if="isFlashCard && !creating && !editing"
+         class="custom-control custom-switch">
+        <input type="checkbox"
+               class="custom-control-input"
+               id="toggle{{ id }}"
+               ng-click="toggleShow()">
+        <label class="custom-control-label"
+               for="toggle{{ id }}"
+               data-toggle="tooltip"
+               title="Show/Hide">
+            <i ng-show="showDescription" class="fas fa-eye"></i>
+            <i ng-hide="showDescription" class="fas fa-eye-slash"></i>
+        </label>
+    </div>
+</div>

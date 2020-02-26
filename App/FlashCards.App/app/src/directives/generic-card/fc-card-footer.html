@@ -1,0 +1,77 @@
+﻿<div>
+    <div class="card-footer" ng-hide="editing">
+        <button ng-if="!creating"
+                ng-click="toggleEdit()"
+                class="btn btn-sm btn-primary btn-oval"
+                data-toggle="tooltip"
+                title="Edit">
+            <i class="fas fa-edit"></i>
+        </button>
+        <button ng-if="creating"
+                id="createButton"
+                ng-click="toggleEdit()"
+                class="btn btn-sm btn-success btn-oval"
+                data-toggle="tooltip"
+                title="Add">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div class="card-footer" ng-show="editing">
+        <div ng-if="creating">
+            <div class="btn-group">
+                <button type="submit" ng-click="create(editCardForm)"
+                        class="btn btn-sm btn-success btn-circle"
+                        data-toggle="tooltip"
+                        title="Save">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button type="reset"
+                        ng-click="toggleEdit()"
+                        class="btn btn-sm btn-dark btn-circle"
+                        data-toggle="tooltip"
+                        title="Cancel">
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+        </div>
+        <div ng-if="!creating">
+            <div ng-hide="deleting" class="btn-group">
+                <button type="submit" ng-click="save(editCardForm)"
+                        class="btn btn-sm btn-success btn-circle"
+                        data-toggle="tooltip"
+                        title="Save">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button ng-click="toggleDelete()"
+                        class="btn btn-sm btn-danger btn-circle"
+                        data-toggle="tooltip"
+                        title="Delete">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button ng-click="toggleEdit()"
+                        class="btn btn-sm btn-dark btn-circle"
+                        data-toggle="tooltip"
+                        title="Cancel">
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+            <div ng-show="deleting">
+                <h6 class="d-inline">Are you sure?</h6>
+                <div class="btn-group">
+                    <button type="button" ng-click="confirmDelete()"
+                            class="btn btn-sm btn-danger btn-circle"
+                            data-toggle="tooltip"
+                            title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button ng-click="toggleDelete()"
+                            class="btn btn-sm btn-dark btn-circle"
+                            data-toggle="tooltip"
+                            title="Cancel">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

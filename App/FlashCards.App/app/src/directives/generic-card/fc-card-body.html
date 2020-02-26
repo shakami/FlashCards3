@@ -1,0 +1,18 @@
+﻿<div class="card-body">
+    <div ng-if="!creating">
+        <div ng-if="!isFlashCard">
+            <a href="/decks/{{ id }}">
+                <h3 class="card-title text-white">{{ title }}</h3>
+            </a>
+        </div>
+        <div ng-if="isFlashCard">
+            <h3 class="card-title text-white">{{ title }}</h3>
+            <p class="card-text" ng-show="showDescription">{{ text }}</p>
+        </div>
+    </div>
+    <div ng-if="creating">
+        <a ng-click="toggleEdit()" role="button" href="">
+            <h3 class="card-title text-white">Add New {{ isFlashCard ? 'Card' : 'Deck' }}</h3>
+        </a>
+    </div>
+</div>
