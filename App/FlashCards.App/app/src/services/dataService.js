@@ -1,5 +1,6 @@
 ﻿(function () {
-
+    'use strict';
+    
     angular.module('app')
         .factory('dataService', ['$http', '$q', dataService]);
 
@@ -12,6 +13,7 @@
             editDeck: editDeck,
             deleteDeck: deleteDeck,
 
+            getAllCards: getAllCards,
             getCardsInDeck: getCardsInDeck,
             createCard: createCard,
             editCard: editCard,
@@ -42,6 +44,21 @@
             return $http(req)
                 .then(sendResponseData)
                 .catch(sendError);
+        }
+
+        function getAllCards() {
+            var cards = [];
+
+            return getAllDecks().then(function (decks) {
+                angular.forEach(decks, function (deck) {
+                    getCardsInDeck(deck.id).then(function (data) {
+                        angular.forEach(data, function (card) {
+                            cards.push(card);
+                        });
+                    });
+                });
+                return cards;
+            });
         }
 
         function getCardsInDeck(deckId) {

@@ -1,8 +1,5 @@
 (function () {
-    
     'use strict';
-    
-    
     
     angular
         .module('app')
@@ -11,7 +8,6 @@
     function fcGenericCard() {
         return {
             restrict: 'E',
-            transclude: true,
             templateUrl: 'app/src/Directives/fc-generic-card.html',
             scope: {
                 title: '=',

@@ -11,17 +11,8 @@
     <h1>{{ vm.deck.name }}</h1>
     <br />
 
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="card-deck">
-                <fc-flash-card ng-repeat="card in vm.cards | filter:vm.searchPhrase"
-                               card="card"
-                               edit-function="vm.editCard(card)"
-                               delete-function="vm.deleteCard(card)">
-                </fc-flash-card>
-                <fc-flash-card-create id="addNewCard" card="vm.newCard" save-function="vm.createCard(vm.newCard)"></fc-flash-card-create>
-            </div>
-        </div>
-    </div>
+    <fc-card-display cards="vm.cards" edit-function="vm.editCard(card)" delete-function="vm.deleteCard(card)">
+        <fc-flash-card-create id="addNewCard" card="vm.newCard" save-function="vm.createCard(vm.newCard)"></fc-flash-card-create>
+    </fc-card-display>
 </div>
 

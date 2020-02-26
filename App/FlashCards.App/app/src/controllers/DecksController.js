@@ -1,14 +1,16 @@
 ﻿(function () {
+    'use strict';
 
     angular
         .module('app')
         .controller('DecksController', DecksController);
 
-    DecksController.$inject = ['dataService', '$anchorScroll', '$scope'];
+    DecksController.$inject = ['dataService', '$anchorScroll', 'decks'];
 
-    function DecksController(dataService, $anchorScroll, $scope) {
+    function DecksController(dataService, $anchorScroll, decks) {
         var vm = this;
-        vm.decks = [];
+
+        vm.decks = decks;
         vm.createDeck = createDeck;
         vm.editDeck = editDeck;
         vm.deleteDeck = deleteDeck;
@@ -16,57 +18,40 @@
 
         vm.scrollToAddNewDeck = scrollToAddNewDeck;
 
-        $scope.$on('searchEvent', function (e, args) {
-            vm.searchPhrase = args.searchPhrase;
-        });
-
-        function scrollToAddNewDeck() {
-            $('#createButton').click();
-            $anchorScroll('addNewDeck');
-        }
-
-
-        activate();
-
-        function activate() {
-            return getDecks();
-        }
-
         function getDecks() {
-            return dataService.getAllDecks().then(function (data) {
-                vm.decks = data;
-                return vm.decks;
-            });
+            return dataService.getAllDecks()
+                .then(function (data) {
+                    vm.decks = data;
+                    return vm.decks;
+                })
+                .catch(function (data) {
+                    console.log('messed up');
+                });
         }
 
-        
         function createDeck(deck) {
-            return dataService.createDeck(deck)
-                .then(function () {
-                    vm.newDeck = {};
-                    return getDecks();
-                })
-                .catch(function (response) {
-                    if (response.status == '422') { // validation error
-
-                    }
-
-                    console.log('error: ' + response);
-                });
+            return dataService.createDeck(deck).then(function () {
+                vm.newDeck = {};
+                getDecks();
+            });
         }
 
         function editDeck(deck) {
             return dataService.editDeck(deck).then(function () {
-                return getDecks();
+                getDecks();
             });
         }
 
         function deleteDeck(deck) {
             return dataService.deleteDeck(deck).then(function () {
-                return getDecks();
+                getDecks();
             });
         }
 
+        function scrollToAddNewDeck() {
+            $('#createButton').click();
+            $anchorScroll('addNewDeck');
+        }
     }
 
 }());

@@ -1,5 +1,4 @@
 ﻿(function () {
-
     'use strict';
 
     angular
@@ -10,9 +9,14 @@
         return {
             restrict: 'E',
             templateUrl: 'app/src/Directives/fc-nav-bar.html',
-            controller: function ($scope) {
+            controller: function ($scope, $location) {
                 $scope.search = function () {
                     $scope.$broadcast('searchEvent', { searchPhrase: $scope.searchPhrase });
+                }
+                $scope.searchGlobal = function () {
+                    if ($scope.searchPhrase) {
+                        $location.path('/search/' + $scope.searchPhrase);
+                    }
                 }
             }
         };

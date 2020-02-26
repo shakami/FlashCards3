@@ -1,48 +1,49 @@
 ﻿(function () {
+    'use strict';
 
     angular
         .module('app')
         .controller('CardsController', CardsController);
 
-    CardsController.$inject = ['$routeParams', 'dataService', '$anchorScroll', '$scope'];
+    CardsController.$inject = ['$routeParams', 'dataService', '$anchorScroll', '$scope', 'cards', 'deck'];
 
-    function CardsController($routeParams, dataService, $anchorScroll, $scope) {
+    function CardsController($routeParams, dataService, $anchorScroll, $scope, cards, deck) {
         var vm = this;
 
-        vm.deck = {};
-        vm.cards = [];
+        vm.deck = deck;
+        vm.cards = cards;
         vm.editCard = editCard;
         vm.deleteCard = deleteCard;
         vm.createCard = createCard;
         vm.newCard = { title: null, description: null };
 
-        vm.deletingDeck = false;
-        vm.toggleDeleteDeck = toggleDeleteDeck;
-
         vm.scrollToAddNewCard = scrollToAddNewCard;
 
-        $scope.$on('searchEvent', function (e, args) {
-            vm.searchPhrase = args.searchPhrase;
-        });
-
-        function scrollToAddNewCard() {
-            $('#createButton').click();
-
-
-            $anchorScroll('createButton');
-        }
-
-        activate();
+        // activate();
 
         function activate() {
-            var deckId = $routeParams.deckId;
 
-            dataService.getDeck(deckId).then(function (data) {
-                vm.deck = data;
-                return vm.deck;
+            if ($routeParams.searchPhrase) {
+                vm.searchPhrase = $routeParams.searchPhrase;
+                //dataService.getAllCards().then(function (data) {
+                //    console.log(data);
+                //    vm.cards = data;
+                //    return vm.cards;
+                //});
+            } else {
+                var deckId = $routeParams.deckId;
+
+                dataService.getDeck(deckId).then(function (data) {
+                    vm.deck = data;
+                    return vm.deck;
+                });
+
+                getCards(deckId);
+            }
+            $scope.$on('searchEvent', function (e, args) {
+                vm.searchPhrase = args.searchPhrase;
             });
 
-            getCards(deckId);
         }
 
         function getCards(deckId) {
@@ -71,8 +72,10 @@
             });
         }
 
-        function toggleDeleteDeck() {
-            vm.deletingDeck = !vm.deletingDeck;
+        function scrollToAddNewCard() {
+            $('#createButton').click();
+
+            $anchorScroll('createButton');
         }
     }
 
