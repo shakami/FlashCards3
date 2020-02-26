@@ -9,22 +9,6 @@
         return {
             restrict: 'E',
             templateUrl: 'app/src/Directives/fc-nav-bar.html',
-            controller: function ($scope, $location) {
-                var path = $location.path()
-                if (path.includes('search')) {
-                    var index = path.lastIndexOf('/');
-                    $scope.searchPhrase = path.substr(index + 1);
-                }
-
-                $scope.search = function () {
-                    $scope.$broadcast('searchEvent', { searchPhrase: $scope.searchPhrase });
-                }
-                $scope.searchGlobal = function () {
-                    if ($scope.searchPhrase) {
-                        $location.path('/search/' + $scope.searchPhrase);
-                    }
-                }
-            }
         };
     }
 
