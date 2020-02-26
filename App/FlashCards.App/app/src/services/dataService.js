@@ -1,10 +1,13 @@
 ﻿(function () {
     'use strict';
-    
-    angular.module('app')
-        .factory('dataService', ['$http', '$q', dataService]);
 
-    function dataService($http, $q) {
+    angular
+        .module('app')
+        .config(httpConfig)
+        .constant('API_URL', 'https://localhost:44789/api/decks/')
+        .factory('dataService', ['$http', '$q', 'API_URL', dataService]);
+
+    function dataService($http, $q, API_URL) {
 
         return {
             getAllDecks: getAllDecks,
@@ -21,11 +24,13 @@
         };
 
         function getAllDecks() {
+            console.log(API_URL);
+
             var req =
             {
                 method: 'GET',
-                url: 'https://localhost:44789/api/decks',
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+                url: API_URL,
+                headers: { 'Accept': 'application/json' }
             };
 
             return $http(req)
@@ -37,8 +42,8 @@
             var req =
             {
                 method: 'GET',
-                url: 'https://localhost:44789/api/decks/' + deckId,
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+                url: API_URL + deckId,
+                headers: { 'Accept': 'application/json' }
             };
 
             return $http(req)
@@ -65,8 +70,8 @@
             var req =
             {
                 method: 'GET',
-                url: 'https://localhost:44789/api/decks/' + deckId + '/cards',
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+                url: API_URL + deckId + '/cards',
+                headers: { 'Accept': 'application/json' }
             };
 
             return $http(req)
@@ -78,8 +83,8 @@
             var req =
             {
                 method: 'POST',
-                url: 'https://localhost:44789/api/decks/',
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                url: API_URL,
+                headers: { 'Accept': 'application/json' },
                 data: deck
             };
 
@@ -92,8 +97,8 @@
             var req =
             {
                 method: 'PUT',
-                url: 'https://localhost:44789/api/decks/' + deck.id,
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                url: API_URL + deck.id,
+                headers: { 'Accept': 'application/json' },
                 data: deck
             };
 
@@ -106,8 +111,8 @@
             var req =
             {
                 method: 'DELETE',
-                url: 'https://localhost:44789/api/decks/' + deck.id,
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
+                url: API_URL + deck.id,
+                headers: { 'Accept': 'application/json' }
             };
 
             return $http(req)
@@ -119,8 +124,8 @@
             var req =
             {
                 method: 'POST',
-                url: 'https://localhost:44789/api/decks/' + deckId + '/cards',
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                url: API_URL + deckId + '/cards',
+                headers: { 'Accept': 'application/json' },
                 data: card
             };
 
@@ -133,8 +138,8 @@
             var req =
             {
                 method: 'PUT',
-                url: 'https://localhost:44789/api/decks/' + card.deckId + '/cards/' + card.id,
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json' },
+                url: API_URL + card.deckId + '/cards/' + card.id,
+                headers: { 'Accept': 'application/json' },
                 data: card
             };
 
@@ -147,8 +152,8 @@
             var req =
             {
                 method: 'DELETE',
-                url: 'https://localhost:44789/api/decks/' + card.deckId + '/cards/' + card.id,
-                headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache'},
+                url: API_URL + card.deckId + '/cards/' + card.id,
+                headers: { 'Accept': 'application/json' },
             };
 
             return $http(req)
@@ -162,9 +167,15 @@
         }
 
         function sendError(response) {
-            return $q.reject(response);
+            return $q.reject(response.status);
         }
 
+    }
+
+    function httpConfig($httpProvider) {
+        $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json';
     }
 
 }());

@@ -5,9 +5,9 @@
         .module('app')
         .controller('DecksController', DecksController);
 
-    DecksController.$inject = ['dataService', '$anchorScroll', 'decks', '$scope'];
+    DecksController.$inject = ['dataService', '$anchorScroll', 'decks', 'notifierService'];
 
-    function DecksController(dataService, $anchorScroll, decks) {
+    function DecksController(dataService, $anchorScroll, decks, notifierService) {
         var vm = this;
 
         vm.decks = decks;
@@ -17,10 +17,15 @@
         vm.scrollToAddNewDeck = scrollToAddNewDeck;
 
         function createDeck(deck) {
-            return dataService.createDeck(deck).then(function () {
-                vm.newDeck = {};
-                getDecks();
-            });
+            return dataService.createDeck(deck)
+                .then(function () {
+                    vm.newDeck = {};
+                    getDecks();
+                })
+                .catch(function (reason) {
+                    console.log(reason);
+                    notifierService.error(reason);
+                });
         }
 
         function getDecks() {
