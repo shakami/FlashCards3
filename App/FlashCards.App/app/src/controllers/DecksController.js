@@ -7,43 +7,18 @@
 
     DecksController.$inject = ['dataService', '$anchorScroll', 'decks', '$scope'];
 
-    function DecksController(dataService, $anchorScroll, decks, $scope) {
+    function DecksController(dataService, $anchorScroll, decks) {
         var vm = this;
 
         vm.decks = decks;
         vm.createDeck = createDeck;
-        vm.editDeck = editDeck;
-        vm.deleteDeck = deleteDeck;
         vm.newDeck = {};
 
         vm.scrollToAddNewDeck = scrollToAddNewDeck;
 
-        activate();
-
-        function activate() {
-            $scope.$on('DeckDeleteEvent', function (e, args) {
-                deleteDeck(args.deck);
-            });
-            $scope.$on('DeckEditEvent', function (e, args) {
-                editDeck(args.deck);
-            });
-        }
-
         function createDeck(deck) {
             return dataService.createDeck(deck).then(function () {
                 vm.newDeck = {};
-                getDecks();
-            });
-        }
-
-        function editDeck(deck) {
-            return dataService.editDeck(deck).then(function () {
-                getDecks();
-            });
-        }
-
-        function deleteDeck(deckId) {
-            return dataService.deleteDeck(deckId).then(function () {
                 getDecks();
             });
         }
