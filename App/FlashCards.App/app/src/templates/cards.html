@@ -11,8 +11,8 @@
     <h1>{{ vm.deck.name }}</h1>
     <br />
 
-    <fc-card-display cards="vm.cards" edit-function="vm.editCard(card)" delete-function="vm.deleteCard(card)">
+    <fc-flash-card-display cards="vm.cards" edit-function="vm.editCard(card)" delete-function="vm.deleteCard(card)">
         <fc-flash-card-create id="addNewCard" card="vm.newCard" save-function="vm.createCard(vm.newCard)"></fc-flash-card-create>
-    </fc-card-display>
+    </fc-flash-card-display>
 </div>
 

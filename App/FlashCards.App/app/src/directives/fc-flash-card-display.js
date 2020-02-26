@@ -1,12 +1,12 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').directive('fcCardDisplay', fcCardDisplay);
+    angular.module('app').directive('fcFlashCardDisplay', fcFlashCardDisplay);
 
-    function fcCardDisplay() {
+    function fcFlashCardDisplay() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/directives/fc-card-display.html',
+            templateUrl: 'app/src/directives/fc-flash-card-display.html',
             transclude: true,
             controller: function ($scope, $routeParams) {
                 $scope.searchPhrase = $routeParams.searchPhrase;
