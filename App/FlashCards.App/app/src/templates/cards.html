@@ -7,12 +7,11 @@
             <i class="fas fa-plus"></i>
         </button>
     </div>
-    
+
     <h1>{{ vm.deck.name }}</h1>
     <br />
 
-    <fc-flash-card-display cards="vm.cards" edit-function="vm.editCard(card)" delete-function="vm.deleteCard(card)">
-        <fc-flash-card-create id="addNewCard" card="vm.newCard" save-function="vm.createCard(vm.newCard)"></fc-flash-card-create>
+    <fc-flash-card-display cards="vm.cards">
+        <fc-flash-card id="addNewCard" card="vm.newCard"></fc-flash-card>
     </fc-flash-card-display>
 </div>
-

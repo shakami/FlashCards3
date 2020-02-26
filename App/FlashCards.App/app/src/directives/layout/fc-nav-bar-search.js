@@ -8,7 +8,7 @@
     function fcNavBarSearch() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/Directives/fc-nav-bar-search.html',
+            templateUrl: 'app/src/directives/layout/fc-nav-bar-search.html',
             controller: function ($scope, $location) {
                 var path = $location.path()
                 if (path.includes('search')) {

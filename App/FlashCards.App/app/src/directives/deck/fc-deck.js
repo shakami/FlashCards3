@@ -8,7 +8,7 @@
     function fcDeck() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/Directives/fc-deck.html',
+            templateUrl: 'app/src/directives/deck/fc-deck.html',
             scope: {
                 deck: '='
             },
@@ -20,7 +20,15 @@
                 $scope.$on('DeleteEvent', function (event) {
                     event.stopPropagation();
                     dataService.deleteDeck($scope.deck);
-                    $scope.$emit('DeckDeleted', { deck: $scope.deck });
+                    $scope.$emit('DeckDeletedEvent', { deck: $scope.deck });
+                });
+                $scope.$on('CreateEvent', function (event, args) {
+                    event.stopPropagation();
+                    var newDeck = { name: args.title };
+                    dataService.createDeck(newDeck).then(function (data) {
+                        newDeck = data;
+                        $scope.$emit('DeckCreatedEvent', { deck: newDeck });
+                    });
                 });
             }
         };

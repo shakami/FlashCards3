@@ -6,7 +6,7 @@
     function fcFlashCardDisplay() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/directives/fc-flash-card-display.html',
+            templateUrl: 'app/src/directives/flash-card/fc-flash-card-display.html',
             transclude: true,
             controller: function ($scope, $routeParams) {
                 $scope.searchPhrase = $routeParams.searchPhrase;
@@ -14,10 +14,15 @@
                     $scope.searchPhrase = args.searchPhrase;
                 });
 
-                $scope.$on('CardDeleted', function (e, args) {
+                $scope.$on('CardDeletedEvent', function (e, args) {
                     e.stopPropagation();
                     var index = $scope.cards.indexOf(args.card);
                     $scope.cards.splice(index, 1);
+                });
+
+                $scope.$on('CardCreatedEvent', function (e, args) {
+                    e.stopPropagation();
+                    $scope.cards.push(args.card);
                 });
             },
             controllerAs: 'vm',

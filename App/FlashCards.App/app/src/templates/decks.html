@@ -1,5 +1,4 @@
 ﻿<div class="container">
-
     <button ng-click="vm.scrollToAddNewDeck()" class="btn btn-success btn-oval mb-3" data-toggle="tooltip" title="Add New Deck">
         <i class="fas fa-plus"></i>
     </button>
@@ -8,6 +7,6 @@
     <br />
 
     <fc-deck-display decks="vm.decks">
-        <fc-deck-create id="addNewDeck" deck="vm.newDeck" save-function="vm.createDeck(vm.newDeck)"></fc-deck-create>
+        <fc-deck id="addNewDeck" deck="vm.newDeck"></fc-deck>
     </fc-deck-display>
 </div>

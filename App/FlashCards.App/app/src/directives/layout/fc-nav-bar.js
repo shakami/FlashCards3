@@ -8,7 +8,7 @@
     function fcNavBar() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/Directives/fc-nav-bar.html',
+            templateUrl: 'app/src/directives/layout/fc-nav-bar.html',
         };
     }
 

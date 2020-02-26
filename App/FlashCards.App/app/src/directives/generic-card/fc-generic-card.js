@@ -8,7 +8,7 @@
     function fcGenericCard() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/Directives/fc-generic-card.html',
+            templateUrl: 'app/src/directives/generic-card/fc-generic-card.html',
             scope: {
                 title: '=',
                 text: '=',
@@ -33,10 +33,13 @@
         $scope.toggleShow = toggleShow;
 
         $scope.save = save;
+        $scope.create = create;
 
         $scope.deleting = false;
         $scope.toggleDelete = toggleDelete;
         $scope.confirmDelete = confirmDelete;
+
+        $scope.creating = $scope.id ? false : true;
 
         activateTooltips();
 
@@ -54,6 +57,12 @@
         }
 
         function toggleEdit() {
+            if ($scope.creating) {
+                setTimeout(function () { $('#createInput').focus() }, 300);
+            } else {
+                setTimeout(function () { $('#editTitleInput' + $scope.id).focus() }, 300);
+            }
+
             $scope.title = $scope.originalTitle;
             $scope.text = $scope.originalText;
             $scope.editing = !$scope.editing;
@@ -66,6 +75,13 @@
         function save(form) {
             if (form.$valid) {
                 $scope.$emit('EditEvent');
+                $scope.editing = false;
+            }
+        }
+
+        function create(form) {
+            if (form.$valid) {
+                $scope.$emit('CreateEvent', { title: $scope.title, text: $scope.text });
                 $scope.editing = false;
             }
         }

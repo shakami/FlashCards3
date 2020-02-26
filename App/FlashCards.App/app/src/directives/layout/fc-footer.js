@@ -8,7 +8,7 @@
     function fcFooter() {
         return {
             restrict: 'E',
-            templateUrl: 'app/src/Directives/fc-footer.html',
+            templateUrl: 'app/src/directives/layout/fc-footer.html',
             controller: function ($scope) {
                 $scope.year = new Date().getFullYear();
             }
