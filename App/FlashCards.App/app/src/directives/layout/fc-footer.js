@@ -12,7 +12,7 @@
             controller: function ($scope) {
                 $scope.year = new Date().getFullYear();
             }
-        }
+        };
     }
 
 })();

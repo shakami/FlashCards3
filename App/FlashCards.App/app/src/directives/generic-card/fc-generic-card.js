@@ -12,36 +12,58 @@
             scope: {
                 title: '=',
                 text: '=',
-                id: '@',
+                fcId: '@',
                 isFlashCard: '@'
             },
-            controller: fcGenericCardController,
-            controllerAs: 'vm'
+            controller: fcGenericCardController
         };
     }
-
 
     fcGenericCardController.$inject = ['$scope'];
     function fcGenericCardController($scope) {
 
-        $scope.editing = false;
         $scope.toggleEdit = toggleEdit;
-        $scope.originalTitle = angular.copy($scope.title);
-        $scope.originalText = angular.copy($scope.text);
-
-        $scope.showDescription = false;
         $scope.toggleShow = toggleShow;
 
         $scope.save = save;
         $scope.create = create;
 
-        $scope.deleting = false;
         $scope.toggleDelete = toggleDelete;
         $scope.confirmDelete = confirmDelete;
 
-        $scope.creating = $scope.id ? false : true;
+        activate();
 
-        activateTooltips();
+        function activate() {
+            $scope.editing = false;
+            $scope.showDescription = false;
+            $scope.deleting = false;
+            $scope.creating = $scope.fcId ? false : true;
+            $scope.inputId = setInputId();
+
+            setTitleAndText();
+
+            activateTooltips();
+        }
+
+        function setInputId() {
+            if ($scope.creating) {
+                return 'createInput';
+            } else if ($scope.isFlashCard) {
+                return 'editCardInput' + $scope.fcId;
+            } else {
+                return 'editDeckInput' + $scope.fcId;
+            }
+        }
+
+        function setTitleAndText() {
+            $scope.originalTitle = angular.copy($scope.title);
+            $scope.originalText = angular.copy($scope.text);
+        }
+
+        function resetTitleAndText() {
+            $scope.title = $scope.originalTitle;
+            $scope.text = $scope.originalText;
+        }
 
         function activateTooltips() {
             return $(function () {
@@ -57,14 +79,10 @@
         }
 
         function toggleEdit() {
-            if ($scope.creating) {
-                setTimeout(function () { $('#createInput').focus() }, 300);
-            } else {
-                setTimeout(function () { $('#editTitleInput' + $scope.id).focus() }, 300);
-            }
+            setTimeout(function () { $('#' + $scope.inputId).focus() }, 300);
 
-            $scope.title = $scope.originalTitle;
-            $scope.text = $scope.originalText;
+            resetTitleAndText();
+
             $scope.editing = !$scope.editing;
         }
 
@@ -75,7 +93,10 @@
         function save(form) {
             if (form.$valid) {
                 $scope.$emit('EditEvent');
+
                 $scope.editing = false;
+
+                setTitleAndText();
             }
         }
 

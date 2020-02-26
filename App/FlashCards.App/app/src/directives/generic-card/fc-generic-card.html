@@ -1,24 +1,14 @@
 <div>
     <div ng-hide="editing"
          class="card {{ creating ? 'bg-secondary' : 'bg-dark' }} text-white mb-3">
-        
+
         <fc-card-header></fc-card-header>
-        
+
         <fc-card-body></fc-card-body>
 
         <fc-card-footer></fc-card-footer>
-        
+
     </div>
 
-    <form ng-show="editing" name="editCardForm">
-        <div class="card text-white mb-3
-                    {{ deleting ? 'bg-danger' : ( creating ? 'bg-success' : 'bg-info') }}">
-            
-            <fc-card-header></fc-card-header>
-            
-            <fc-card-body-edit></fc-card-body-edit>
-
-            <fc-card-footer></fc-card-footer>
-        </div>
-    </form>
+    <fc-card-edit ng-show="editing"></fc-card-edit>
 </div>
