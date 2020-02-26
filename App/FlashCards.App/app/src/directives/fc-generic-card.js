@@ -1,10 +1,10 @@
 (function () {
     'use strict';
-    
+
     angular
         .module('app')
         .directive('fcGenericCard', fcGenericCard);
-    
+
     function fcGenericCard() {
         return {
             restrict: 'E',
@@ -12,28 +12,26 @@
             scope: {
                 title: '=',
                 text: '=',
-                link: '@',
-                flashCardId: '@',
-                editFunction: '&',
-                deleteFunction: '&'
+                id: '@',
+                isFlashCard: '@'
             },
             controller: fcGenericCardController,
             controllerAs: 'vm'
         };
     }
-    
-    
+
+
     fcGenericCardController.$inject = ['$scope'];
     function fcGenericCardController($scope) {
-        
+
         $scope.editing = false;
         $scope.toggleEdit = toggleEdit;
         $scope.originalTitle = angular.copy($scope.title);
         $scope.originalText = angular.copy($scope.text);
-        
+
         $scope.showDescription = false;
         $scope.toggleShow = toggleShow;
-        
+
         $scope.save = save;
 
         $scope.deleting = false;
@@ -54,7 +52,7 @@
         function toggleShow() {
             $scope.showDescription = !$scope.showDescription;
         }
-        
+
         function toggleEdit() {
             $scope.title = $scope.originalTitle;
             $scope.text = $scope.originalText;
@@ -67,15 +65,14 @@
 
         function save(form) {
             if (form.$valid) {
-                $scope.editFunction();
+                $scope.$emit('EditEvent', { id: $scope.id });
                 $scope.editing = false;
             }
         }
 
         function confirmDelete() {
-            $scope.deleteFunction();
-            $scope.editing = false;
+            $scope.$emit('DeleteEvent', { id: $scope.id });
         }
     }
-    
+
 })();

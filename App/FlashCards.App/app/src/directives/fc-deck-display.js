@@ -12,19 +12,10 @@
                 $scope.$on('searchEvent', function (e, args) {
                     $scope.searchPhrase = args.searchPhrase;
                 });
-
-                $scope.editDeck = function (deck) {
-                    $scope.editFunction({ deck: deck });
-                }
-                $scope.deleteDeck = function (deck) {
-                    $scope.deleteFunction({ deck: deck })
-                }
             },
             transclude: true,
             scope: {
-                decks: '=',
-                editFunction: '&',
-                deleteFunction: '&'
+                decks: '='
             }
         }
     }

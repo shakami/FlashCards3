@@ -5,9 +5,9 @@
         .module('app')
         .controller('CardsController', CardsController);
 
-    CardsController.$inject = ['$routeParams', 'dataService', '$anchorScroll', '$scope', 'cards', 'deck'];
+    CardsController.$inject = ['dataService', '$anchorScroll', 'cards', 'deck', '$scope'];
 
-    function CardsController($routeParams, dataService, $anchorScroll, $scope, cards, deck) {
+    function CardsController(dataService, $anchorScroll, cards, deck, $scope) {
         var vm = this;
 
         vm.deck = deck;
@@ -19,37 +19,14 @@
 
         vm.scrollToAddNewCard = scrollToAddNewCard;
 
-        // activate();
+        activate();
 
         function activate() {
-
-            if ($routeParams.searchPhrase) {
-                vm.searchPhrase = $routeParams.searchPhrase;
-                //dataService.getAllCards().then(function (data) {
-                //    console.log(data);
-                //    vm.cards = data;
-                //    return vm.cards;
-                //});
-            } else {
-                var deckId = $routeParams.deckId;
-
-                dataService.getDeck(deckId).then(function (data) {
-                    vm.deck = data;
-                    return vm.deck;
-                });
-
-                getCards(deckId);
-            }
-            $scope.$on('searchEvent', function (e, args) {
-                vm.searchPhrase = args.searchPhrase;
+            $scope.$on('CardDeleteEvent', function (e, args) {
+                deleteCard(args.card);
             });
-
-        }
-
-        function getCards(deckId) {
-            dataService.getCardsInDeck(deckId).then(function (data) {
-                vm.cards = data;
-                return vm.cards;
+            $scope.$on('CardEditEvent', function (e, args) {
+                editCard(args.card);
             });
         }
 
@@ -69,6 +46,13 @@
             return dataService.createCard(vm.deck.id, card).then(function () {
                 vm.newCard = {};
                 return getCards(vm.deck.id);
+            });
+        }
+
+        function getCards(deckId) {
+            dataService.getCardsInDeck(deckId).then(function (data) {
+                vm.cards = data;
+                return vm.cards;
             });
         }
 

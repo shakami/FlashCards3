@@ -2,9 +2,7 @@
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="card-deck">
-                <fc-deck ng-repeat="deck in decks | filter:searchPhrase" deck="deck"
-                         edit-function="editDeck(deck)"
-                         delete-function="deleteDeck(deck)">
+                <fc-deck ng-repeat="deck in decks | filter:searchPhrase" deck="deck">
                 </fc-deck>
                 <div ng-transclude></div>
             </div>

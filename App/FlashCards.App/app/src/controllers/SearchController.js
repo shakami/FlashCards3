@@ -5,11 +5,13 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', 'decks', 'cards'];
+    SearchController.$inject = ['decks', 'cards'];
 
-    function SearchController($scope, decks, cards) {
-        $scope.decks = decks;
-        $scope.cards = cards;
+    function SearchController(decks, cards) {
+        var vm = this;
+
+        vm.decks = decks;
+        vm.cards = cards;
     }
 
 })();

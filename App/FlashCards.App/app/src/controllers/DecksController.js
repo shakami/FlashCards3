@@ -5,9 +5,9 @@
         .module('app')
         .controller('DecksController', DecksController);
 
-    DecksController.$inject = ['dataService', '$anchorScroll', 'decks'];
+    DecksController.$inject = ['dataService', '$anchorScroll', 'decks', '$scope'];
 
-    function DecksController(dataService, $anchorScroll, decks) {
+    function DecksController(dataService, $anchorScroll, decks, $scope) {
         var vm = this;
 
         vm.decks = decks;
@@ -18,15 +18,15 @@
 
         vm.scrollToAddNewDeck = scrollToAddNewDeck;
 
-        function getDecks() {
-            return dataService.getAllDecks()
-                .then(function (data) {
-                    vm.decks = data;
-                    return vm.decks;
-                })
-                .catch(function (data) {
-                    console.log('messed up');
-                });
+        activate();
+
+        function activate() {
+            $scope.$on('DeckDeleteEvent', function (e, args) {
+                deleteDeck(args.deck.id);
+            });
+            $scope.$on('DeckEditEvent', function (e, args) {
+                editDeck(args.deck);
+            });
         }
 
         function createDeck(deck) {
@@ -42,10 +42,21 @@
             });
         }
 
-        function deleteDeck(deck) {
-            return dataService.deleteDeck(deck).then(function () {
+        function deleteDeck(deckId) {
+            return dataService.deleteDeck(deckId).then(function () {
                 getDecks();
             });
+        }
+
+        function getDecks() {
+            return dataService.getAllDecks()
+                .then(function (data) {
+                    vm.decks = data;
+                    return vm.decks;
+                })
+                .catch(function (data) {
+                    console.log('messed up');
+                });
         }
 
         function scrollToAddNewDeck() {

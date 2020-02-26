@@ -2,15 +2,15 @@
     <div ng-hide="editing"
          class="card bg-dark text-white mb-3">
         <div class="card-header">
-            <span ng-if="!flashCardId">&nbsp;</span>
-            <div ng-show="flashCardId"
+            <span ng-if="!isFlashCard">&nbsp;</span>
+            <div ng-show="isFlashCard"
                  class="custom-control custom-switch">
                 <input type="checkbox"
                        class="custom-control-input"
-                       id="toggle{{ flashCardId }}"
+                       id="toggle{{ id }}"
                        ng-click="toggleShow()">
                 <label class="custom-control-label"
-                       for="toggle{{ flashCardId }}"
+                       for="toggle{{ id }}"
                        data-toggle="tooltip"
                        title="Show/Hide">
                     <i ng-show="showDescription" class="fas fa-eye"></i>
@@ -19,9 +19,10 @@
             </div>
         </div>
         <div class="card-body">
-            <a href="{{ link }}">
+            <a ng-if="!isFlashCard" href="/decks/{{ id }}">
                 <h3 class="card-title text-white">{{ title }}</h3>
             </a>
+            <h3 ng-if="isFlashCard" class="card-title text-white">{{ title }}</h3>
             <p class="card-text" ng-show="showDescription">{{ text }}</p>
         </div>
         <div class="card-footer">
@@ -45,11 +46,11 @@
                        ng-model="title"
                        placeholder="Title"
                        required />
-                <textarea rows="3" ng-show="flashCardId"
+                <textarea rows="3" ng-show="isFlashCard"
                           class="card-text form-control"
                           ng-model="text"
                           placeholder="Description"
-                          ng-required="flashCardId">
+                          ng-required="isFlashCard">
                 </textarea>
             </div>
             <div class="card-footer">

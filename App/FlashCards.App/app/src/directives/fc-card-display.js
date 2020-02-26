@@ -13,20 +13,10 @@
                 $scope.$on('searchEvent', function (e, args) {
                     $scope.searchPhrase = args.searchPhrase;
                 });
-
-                $scope.editCard = function (card) {
-                    $scope.editFunction({ card: card });
-                }
-
-                $scope.deleteCard = function (card) {
-                    $scope.deleteFunction({ card: card });
-                }
             },
             controllerAs: 'vm',
             scope: {
-                cards: '=',
-                editFunction: '&',
-                deleteFunction: '&'
+                cards: '='
             }
         }
     }
