@@ -12,12 +12,18 @@
             scope: {
                 deck: '='
             },
-            controller: function ($scope) {
-                $scope.$on('EditEvent', function (e, args) {
-                    $scope.$emit('DeckEditEvent', { deck: $scope.deck });
+            controller: function ($scope, dataService) {
+                $scope.$on('EditEvent', function (event) {
+                    // event.stopPropagation();
+                    dataService.editDeck($scope.deck);
+
+                    //$scope.$emit('DeckEditEvent', { deck: $scope.deck });
                 });
-                $scope.$on('DeleteEvent', function (e, args) {
-                    $scope.$emit('DeckDeleteEvent', { deck: $scope.deck });
+                $scope.$on('DeleteEvent', function (event) {
+                    event.stopPropagation();
+                    dataService.deleteDeck($scope.deck);
+                    $scope.$emit('DeckDeleted', { deck: $scope.deck });
+                    //$scope.$emit('DeckDeleteEvent', { deck: $scope.deck });
                 });
             }
         };

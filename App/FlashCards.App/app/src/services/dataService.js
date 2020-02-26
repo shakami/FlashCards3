@@ -102,11 +102,11 @@
                 .catch(sendError);
         }
 
-        function deleteDeck(deckId) {
+        function deleteDeck(deck) {
             var req =
             {
                 method: 'DELETE',
-                url: 'https://localhost:44789/api/decks/' + deckId,
+                url: 'https://localhost:44789/api/decks/' + deck.id,
                 headers: { 'Accept': 'application/json', 'Cache-Control': 'no-cache' }
             };
 

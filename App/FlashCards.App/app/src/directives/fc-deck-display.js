@@ -12,6 +12,11 @@
                 $scope.$on('searchEvent', function (e, args) {
                     $scope.searchPhrase = args.searchPhrase;
                 });
+                $scope.$on('DeckDeleted', function (e, args) {
+                    e.stopPropagation();
+                    var index = $scope.decks.indexOf(args.deck);
+                    $scope.decks.splice(index, 1);
+                });
             },
             transclude: true,
             scope: {

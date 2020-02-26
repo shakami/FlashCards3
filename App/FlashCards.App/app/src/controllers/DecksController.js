@@ -22,7 +22,7 @@
 
         function activate() {
             $scope.$on('DeckDeleteEvent', function (e, args) {
-                deleteDeck(args.deck.id);
+                deleteDeck(args.deck);
             });
             $scope.$on('DeckEditEvent', function (e, args) {
                 editDeck(args.deck);
