@@ -16,24 +16,40 @@
         };
     }
 
-    fcDeckController.$inject = ['$scope', 'dataService']
-    function fcDeckController($scope, dataService) {
+    fcDeckController.$inject = ['$scope', 'dataService', 'notifierService']
+    function fcDeckController($scope, dataService, notifierService) {
         $scope.$on('EditEvent', function (event) {
             event.stopPropagation();
-            dataService.editDeck($scope.deck);
+            dataService.editDeck($scope.deck)
+                .then(function () {
+                    notifierService.success();
+                })
+                .catch(function (reason) {
+                    notifierService.error(reason);
+                });
         });
         $scope.$on('DeleteEvent', function (event) {
             event.stopPropagation();
-            dataService.deleteDeck($scope.deck);
-            $scope.$emit('DeckDeletedEvent', { deck: $scope.deck });
+            dataService.deleteDeck($scope.deck)
+                .then(function () {
+                    $scope.$emit('DeckDeletedEvent', { deck: $scope.deck })
+                    notifierService.success();
+                }).catch(function (reason) {
+                    notifierService.error(reason);
+                });
         });
         $scope.$on('CreateEvent', function (event, args) {
             event.stopPropagation();
             var newDeck = { name: args.title };
-            dataService.createDeck(newDeck).then(function (data) {
-                newDeck = data;
-                $scope.$emit('DeckCreatedEvent', { deck: newDeck });
-            });
+            dataService.createDeck(newDeck)
+                .then(function (data) {
+                    newDeck = data;
+                    $scope.$emit('DeckCreatedEvent', { deck: newDeck });
+                    notifierService.success();
+                })
+                .catch(function (reason) {
+                    notifierService.error(reason);
+                });
         });
     }
 

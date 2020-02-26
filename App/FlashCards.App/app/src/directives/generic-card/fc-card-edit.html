@@ -11,12 +11,12 @@
                    ng-model="title"
                    placeholder="Title"
                    ng-required="true" />
-            <textarea rows="3" ng-if="isFlashCard"
+            <textarea rows="3" ng-show="isFlashCard"
                       class="card-text form-control"
                       ng-model="text"
                       placeholder="Description"
                       ng-required="isFlashCard">
-                </textarea>
+            </textarea>
         </div>
 
         <div class="card-footer">

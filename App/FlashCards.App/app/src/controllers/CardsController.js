@@ -12,6 +12,7 @@
 
         vm.deck = deck;
         vm.cards = cards;
+        vm.newCard = { title: null, description: null };
 
         vm.scrollToAddNewCard = scrollToAddNewCard;
 

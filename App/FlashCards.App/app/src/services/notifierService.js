@@ -15,12 +15,12 @@
             info: notifyInfo
         };
 
-        function notifySuccess(message) {
-            toastr.success(message, 'Success!');
+        function notifySuccess() {
+            toastr.success('All changes saved.', 'Success!');
         }
 
-        function notifyError(message) {
-            toastr.error(message, 'Error!');
+        function notifyError(reason) {
+            toastr.error('Could NOT save changes to the server. ' + reason, 'Error!');
         }
 
         function notifyWarning(message) {

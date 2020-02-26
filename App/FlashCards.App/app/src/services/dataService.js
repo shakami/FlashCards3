@@ -167,7 +167,7 @@
         }
 
         function sendError(response) {
-            return $q.reject(response.status);
+            return $q.reject('Error Code: ' + response.status);
         }
 
     }
