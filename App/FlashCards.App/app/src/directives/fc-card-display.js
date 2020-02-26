@@ -13,6 +13,12 @@
                 $scope.$on('searchEvent', function (e, args) {
                     $scope.searchPhrase = args.searchPhrase;
                 });
+
+                $scope.$on('CardDeleted', function (e, args) {
+                    e.stopPropagation();
+                    var index = $scope.cards.indexOf(args.card);
+                    $scope.cards.splice(index, 1);
+                });
             },
             controllerAs: 'vm',
             scope: {

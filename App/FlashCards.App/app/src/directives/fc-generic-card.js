@@ -65,13 +65,13 @@
 
         function save(form) {
             if (form.$valid) {
-                $scope.$emit('EditEvent', { id: $scope.id });
+                $scope.$emit('EditEvent');
                 $scope.editing = false;
             }
         }
 
         function confirmDelete() {
-            $scope.$emit('DeleteEvent', { id: $scope.id });
+            $scope.$emit('DeleteEvent');
         }
     }
 
