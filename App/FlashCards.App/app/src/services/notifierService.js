@@ -20,11 +20,11 @@
         }
 
         function notifyError(reason) {
-            toastr.error('Could NOT save changes to the server. ' + reason, 'Error!');
+            toastr.error('Could not communicate with the server. ' + reason, 'Error!');
         }
 
-        function notifyWarning(message) {
-            toastr.warning(message, 'Warning');
+        function notifyWarning(reason) {
+            toastr.warning('Could NOT save changes to the server. ' + reason, 'Warning');
         }
 
         function notifyInfo(message) {

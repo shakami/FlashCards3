@@ -25,7 +25,7 @@
                     notifierService.success();
                 })
                 .catch(function (reason) {
-                    notifierService.error(reason);
+                    notifierService.warning(reason);
                 });
         });
         $scope.$on('DeleteEvent', function (event) {
@@ -36,7 +36,7 @@
                     notifierService.success();
                 })
                 .catch(function (reason) {
-                    notifierService.error(reason);
+                    notifierService.warning(reason);
                 });
         });
         $scope.$on('CreateEvent', function (event, args) {
@@ -55,7 +55,7 @@
                     notifierService.success();
                 })
                 .catch(function (reason) {
-                    notifierService.error(reason);
+                    notifierService.warning(reason);
                 });
         });
     }
