@@ -1,5 +1,5 @@
 ﻿<div class="container">
-    <div class="container-fluid">
+    <div class="container-fluid" ng-show="filteredDecks">
         <div class="row flex-nowrap">
             <div class="card-deck">
                 <fc-deck ng-repeat="deck in filteredDecks" deck="deck">
@@ -7,5 +7,7 @@
                 <div ng-transclude></div>
             </div>
         </div>
+    </div>
+    <div ng-hide="filteredDecks" class="fc-spinner">
     </div>
 </div>

@@ -19,8 +19,8 @@
         };
     }
 
-    fcGenericCardController.$inject = ['$scope'];
-    function fcGenericCardController($scope) {
+    fcGenericCardController.$inject = ['$scope', '$timeout'];
+    function fcGenericCardController($scope, $timeout) {
 
         $scope.toggleEdit = toggleEdit;
         $scope.toggleShow = toggleShow;
@@ -79,7 +79,9 @@
         }
 
         function toggleEdit() {
-            setTimeout(function () { $('#' + $scope.inputId).focus() }, 300);
+            $timeout(function () {
+                $('#' + $scope.inputId).focus()
+            }, 300);
 
             resetTitleAndText();
 

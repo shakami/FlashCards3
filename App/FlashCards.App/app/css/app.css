@@ -48,3 +48,8 @@ footer {
     font-size: 12px;
     line-height: 1rem;
 }
+
+.fc-spinner .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}

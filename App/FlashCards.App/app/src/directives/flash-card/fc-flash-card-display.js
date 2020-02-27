@@ -17,10 +17,17 @@
         };
     }
 
-    fcFlashCardDisplayController.$inject = ['$scope', '$routeParams', 'searchService'];
-    function fcFlashCardDisplayController($scope, $routeParams, searchService) {
-        var searchPhrase = $routeParams.searchPhrase;
-        $scope.filteredCards = searchService($scope.cards, searchPhrase);
+    fcFlashCardDisplayController.$inject = ['$scope', '$routeParams', 'searchService', '$timeout'];
+    function fcFlashCardDisplayController($scope, $routeParams, searchService, $timeout) {
+        activate();
+
+        function activate() {
+            var searchPhrase = $routeParams.searchPhrase;
+
+            $timeout(function () {
+                $scope.filteredCards = searchService($scope.cards, searchPhrase);
+            }, 500);
+        }
 
         $scope.$on('searchEvent', function (e, args) {
             searchPhrase = args.searchPhrase;
