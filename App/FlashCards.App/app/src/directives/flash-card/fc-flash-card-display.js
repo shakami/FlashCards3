@@ -1,7 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').directive('fcFlashCardDisplay', fcFlashCardDisplay);
+    angular
+        .module('app')
+        .directive('fcFlashCardDisplay', fcFlashCardDisplay);
 
     function fcFlashCardDisplay() {
         return {
@@ -15,11 +17,14 @@
         };
     }
 
-    fcFlashCardDisplayController.$inject = ['$scope', '$routeParams'];
-    function fcFlashCardDisplayController($scope, $routeParams) {
-        $scope.searchPhrase = $routeParams.searchPhrase;
+    fcFlashCardDisplayController.$inject = ['$scope', '$routeParams', 'searchService'];
+    function fcFlashCardDisplayController($scope, $routeParams, searchService) {
+        var searchPhrase = $routeParams.searchPhrase;
+        $scope.filteredCards = searchService($scope.cards, searchPhrase);
+
         $scope.$on('searchEvent', function (e, args) {
-            $scope.searchPhrase = args.searchPhrase;
+            searchPhrase = args.searchPhrase;
+            $scope.filteredCards = searchService($scope.cards, searchPhrase);
         });
 
         $scope.$on('CardDeletedEvent', function (e, args) {

@@ -1,7 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').directive('fcDeckDisplay', fcDeckDisplay);
+    angular
+        .module('app')
+        .directive('fcDeckDisplay', fcDeckDisplay);
 
     function fcDeckDisplay() {
         return {
@@ -15,12 +17,16 @@
         };
     }
 
-    fcDeckDisplayController.$inject = ['$scope', '$routeParams'];
+    fcDeckDisplayController.$inject = ['$scope', '$routeParams', 'searchService'];
 
-    function fcDeckDisplayController($scope, $routeParams) {
-        $scope.searchPhrase = $routeParams.searchPhrase;
+    function fcDeckDisplayController($scope, $routeParams, searchService) {
+
+        var searchPhrase = $routeParams.searchPhrase;
+        $scope.filteredDecks = searchService($scope.decks, searchPhrase);
+
         $scope.$on('searchEvent', function (e, args) {
-            $scope.searchPhrase = args.searchPhrase;
+            searchPhrase = args.searchPhrase;
+            $scope.filteredDecks = searchService($scope.decks, searchPhrase);
         });
         $scope.$on('DeckDeletedEvent', function (e, args) {
             e.stopPropagation();
