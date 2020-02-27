@@ -19,10 +19,12 @@
 
     fcFlashCardDisplayController.$inject = ['$scope', '$routeParams', 'searchService', '$timeout'];
     function fcFlashCardDisplayController($scope, $routeParams, searchService, $timeout) {
+        var searchPhrase;
+
         activate();
 
         function activate() {
-            var searchPhrase = $routeParams.searchPhrase;
+            searchPhrase = $routeParams.searchPhrase;
 
             $timeout(function () {
                 $scope.filteredCards = searchService($scope.cards, searchPhrase);

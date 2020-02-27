@@ -21,10 +21,11 @@
 
     function fcDeckDisplayController($scope, $routeParams, searchService, $timeout) {
 
+        var searchPhrase;
         activate();
 
         function activate() {
-            var searchPhrase = $routeParams.searchPhrase;
+            searchPhrase = $routeParams.searchPhrase;
 
             $timeout(function () {
                 $scope.filteredDecks = searchService($scope.decks, searchPhrase);

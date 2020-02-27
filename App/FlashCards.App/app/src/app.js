@@ -6,7 +6,7 @@
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);
-        
+
         $routeProvider
             .when('/decks', {
                 controller: 'DecksController',
@@ -84,4 +84,12 @@
             })
             .otherwise('/decks');
     }]);
+
+    app.run(function ($rootScope, $route) {
+        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+            if (!current.pathParams.searchPhrase) {
+                $rootScope.$broadcast('removeSearchEvent');
+            }
+        });
+    });
 })();

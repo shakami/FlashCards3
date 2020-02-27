@@ -15,6 +15,7 @@
 
     fcNavBarSearchController.$inject = ['$scope', '$location'];
     function fcNavBarSearchController($scope, $location) {
+
         var path = $location.path()
         if (path.includes('search')) {
             var index = path.lastIndexOf('/');
@@ -24,11 +25,18 @@
         $scope.search = function () {
             $scope.$broadcast('searchEvent', { searchPhrase: $scope.searchPhrase });
         }
+
         $scope.searchGlobal = function () {
             if ($scope.searchPhrase) {
                 $location.path('/search/' + $scope.searchPhrase);
             }
         }
+
+        $scope.$on('removeSearchEvent', function (e, args) {
+            e.preventDefault();
+            $scope.searchPhrase = "";
+            $scope.search();
+        });
     }
 
 })();
