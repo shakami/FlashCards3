@@ -24,8 +24,6 @@
         };
 
         function getAllDecks() {
-            console.log(API_URL);
-
             var req =
             {
                 method: 'GET',
@@ -167,7 +165,7 @@
         }
 
         function sendError(response) {
-            return $q.reject('Error Code: ' + response.status);
+            return $q.reject('Status Code: ' + response.status);
         }
 
     }
